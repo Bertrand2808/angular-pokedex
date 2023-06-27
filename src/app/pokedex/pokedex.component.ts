@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { CardComponent } from '../card/card.component';
 
 interface Pokemon {
   id: number;
@@ -40,5 +41,10 @@ export class PokedexComponent implements OnInit {
         this.getPokemonList(data.next);
       }
     });
+  }
+
+  onPokemonSelected(pokemon: Pokemon) {
+    console.log('Pokémon sélectionné :', pokemon);
+    // Faites ce que vous souhaitez avec le Pokémon sélectionné
   }
 }
