@@ -8,12 +8,14 @@ interface Pokemon {
 }
 
 @Component({
-  selector: 'app-pokedex',
-  templateUrl: './pokedex.component.html',
-  styleUrls: ['./pokedex.component.css']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
 })
-export class PokedexComponent implements OnInit {
+export class SearchComponent implements OnInit {
   pokemonList: Pokemon[] = [];
+  pokemon: any = { number: '' , name: '', imageUrl: '' };
+
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -32,7 +34,7 @@ export class PokedexComponent implements OnInit {
             name: pokemonData.name,
             imageUrl: pokemonData.sprites.front_default
           });
-          this.pokemonList.sort((a, b) => a.id - b.id); // Sort the pokemonList array by ID
+          this.pokemonList.sort((a, b) => a.id - b.id);
         });
       });
       if (data.next) {
@@ -43,6 +45,5 @@ export class PokedexComponent implements OnInit {
 
   onPokemonSelected(pokemon: Pokemon) {
     console.log('Pokémon sélectionné :', pokemon);
-    // Faites ce que vous souhaitez avec le Pokémon sélectionné
   }
 }

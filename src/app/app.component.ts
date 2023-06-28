@@ -13,7 +13,7 @@ export class AppComponent {
     this.router.navigate(['/pokedex']);
   }
 
-  goToCard() {
-    this.router.navigate(['/card']);
+  goToSearch() {
+    this.router.navigate(['/search']);
   }
 }

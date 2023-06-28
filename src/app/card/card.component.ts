@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { PokemonService } from '../pokemon.service';
 
 interface Pokemon {
   id: number;
@@ -13,29 +14,42 @@ interface Pokemon {
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  @Input() pokemon: any;
+  @Input() pokemon: any = { number: '', name: '', imageUrl: '' };
   @Input() pokemonList: Pokemon[] = [];
   @Output() pokemonSelected: EventEmitter<any> = new EventEmitter();
   searchText: string = '';
   filteredPokemonList: any[] = [];
   imageUrl: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private pokemonService: PokemonService) { }
 
-  selectPokemon() {
-    this.fetchPokemonImage('https://pokeapi.co/api/v2/pokemon/' + this.pokemon.number + '/');
-    this.pokemonSelected.emit(this.pokemon);
+  selectPokemon(pokemon: any) {
+    this.fetchPokemonDetails(pokemon);
+    this.pokemonSelected.emit(pokemon.number);
   }
 
-  fetchPokemonImage(url: string) {
-    this.http.get(url).subscribe((pokemonData: any) => {
-      this.imageUrl = pokemonData.sprites.front_default;
-    });
+  fetchPokemonImage() {
+    this.pokemonService.getPokemonList('https://pokeapi.co/api/v2/pokemon/' + this.pokemon.number + '/')
+      .subscribe((pokemonData: any) => {
+        this.imageUrl = pokemonData.sprites.front_default;
+        this.pokemon.name = pokemonData.name;
+      });
+      console.log(this.pokemon.name);
+      console.log(this.pokemon.number)
   }
+
+  fetchPokemonDetails(pokemon: any) {
+    this.pokemonService.getPokemonDetails(pokemon.url)
+      .subscribe((pokemonData: any) => {
+        this.pokemon.number = pokemonData.id;
+        this.pokemon.name = pokemonData.name;
+        this.pokemon.imageUrl = pokemonData.sprites.front_default;
+        this.pokemonSelected.emit(this.pokemon);
+      });
+  }
+
   searchPokemon() {
-    if (this.searchText.trim() === '') {
-      this.filteredPokemonList = [];
-    } else {
+    if (this.searchText && this.searchText.trim() !== '') {
       const searchUrl = `https://pokeapi.co/api/v2/pokemon?limit=1000`;
       this.http.get(searchUrl).subscribe((data: any) => {
         const results: any[] = data.results;
@@ -43,7 +57,8 @@ export class CardComponent {
           pokemon.name && pokemon.name.toLowerCase().includes(this.searchText.toLowerCase())
         );
       });
+    } else {
+      this.filteredPokemonList = [];
     }
   }
-
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon',
@@ -12,13 +13,10 @@ export class PokemonComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.getPokemonList();
+
   }
 
-  getPokemonList() {
-    const apiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=100';
-    this.http.get(apiUrl).subscribe((data: any) => {
-      this.pokemonList = data.results;
-    });
+  getPokemonList(url: string): Observable<any> {
+    return this.http.get(url);
   }
 }
