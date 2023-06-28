@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CardComponent } from '../card/card.component';
-
+import { PokemonComponent } from '../pokemon/pokemon.component';
 interface Pokemon {
   id: number;
   name: string;

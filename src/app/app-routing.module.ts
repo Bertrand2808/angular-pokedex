@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PokedexComponent } from './pokedex/pokedex.component';
 import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
+import { PokemonComponent } from './pokemon/pokemon.component';
 
 const routes: Routes = [
   { path: 'pokedex', component: PokedexComponent },
   { path: 'home', component: HomeComponent },
   { path: 'card', component: CardComponent },
+  { path: 'pokemon', component: PokemonComponent },
   // Add any other routes if needed
 ];
 

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { PokedexComponent } from './pokedex/pokedex.component';
 import { HomeComponent } from './home/home.component';
 import { CardComponent } from './card/card.component';
+import { PokemonComponent } from './pokemon/pokemon.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     PokedexComponent,
     HomeComponent,
-    CardComponent,
+    PokemonComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
