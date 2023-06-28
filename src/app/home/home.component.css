@@ -17,4 +17,28 @@
   height: auto;
   margin-bottom: 20px;
 }
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.button-container-nav {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e00000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #b50000;
+}
 
