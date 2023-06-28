@@ -19,6 +19,11 @@ export class PokemonService {
     return this.http.get(url);
   }
 
+  getPokemonDetailsById(pokemonId: string): Observable<any> {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}`;
+    return this.http.get(url);
+  }
+
   getPokemonList(url: string): Observable<any> {
     return this.http.get(url).pipe(
       map((pokemonData: any) => {

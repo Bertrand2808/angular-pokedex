@@ -5,6 +5,7 @@ interface Pokemon {
   id: number;
   name: string;
   imageUrl: string;
+  url: string;
 }
 
 @Component({
@@ -14,6 +15,7 @@ interface Pokemon {
 })
 export class PokedexComponent implements OnInit {
   pokemonList: Pokemon[] = [];
+  selectedPokemon: Pokemon | null = null;
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -26,11 +28,12 @@ export class PokedexComponent implements OnInit {
       const results: any[] = data.results;
       results.forEach((pokemon: any) => {
         const pokemonId: number = +pokemon.url.split('/')[6];
-        this.pokemonService.getPokemonList(pokemon.url).subscribe((pokemonData: any) => {
+        this.pokemonService.getPokemonDetails(pokemon.url).subscribe((pokemonData: any) => {
           this.pokemonList.push({
             id: pokemonId,
             name: pokemonData.name,
-            imageUrl: pokemonData.sprites.front_default
+            imageUrl: pokemonData.sprites.front_default,
+            url: pokemon.url
           });
           this.pokemonList.sort((a, b) => a.id - b.id); // Sort the pokemonList array by ID
         });
@@ -41,8 +44,11 @@ export class PokedexComponent implements OnInit {
     });
   }
 
-  onPokemonSelected(pokemon: Pokemon) {
-    console.log('Pokémon sélectionné :', pokemon);
-    // Faites ce que vous souhaitez avec le Pokémon sélectionné
+  selectPokemon(pokemon: Pokemon) {
+    this.selectedPokemon = pokemon;
+    this.pokemonService.getPokemonDetails(pokemon.url).subscribe((pokemonData: any) => {
+      // Effectuez les actions souhaitées avec les détails du Pokémon
+      console.log('Détails du Pokémon sélectionné :', pokemonData);
+    });
   }
 }
