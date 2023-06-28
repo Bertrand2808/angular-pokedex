@@ -11,6 +11,7 @@ import { PokemonComponent } from './pokemon/pokemon.component';
 import { FormsModule } from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
+import { KeyLoggerComponent } from './key-logger/key-logger.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.compo
     PokemonComponent,
     CardComponent,
     SearchComponent,
-    PokemonDetailsComponent
+    PokemonDetailsComponent,
+    KeyLoggerComponent
   ],
   imports: [
     BrowserModule,

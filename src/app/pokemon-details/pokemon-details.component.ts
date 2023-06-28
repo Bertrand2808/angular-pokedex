@@ -21,6 +21,7 @@ interface Pokemon {
 })
 export class PokemonDetailsComponent implements OnInit {
   pokemon: Pokemon | null = null;
+  finalId!: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,12 +30,13 @@ export class PokemonDetailsComponent implements OnInit {
 
   ngOnInit() {
     const pokemonId = this.route.snapshot.paramMap.get('id');
+    this.finalId = Number(pokemonId);
     if (pokemonId) {
-      this.getPokemonDetails(pokemonId);
+      this.getPokemonDetails(this.finalId);
     }
   }
 
-  getPokemonDetails(pokemonId: string) {
+  getPokemonDetails(pokemonId: number) {
     this.pokemonService.getPokemonDetailsById(pokemonId).subscribe((pokemonData: any) => {
       this.pokemon = {
         id: pokemonData.id,

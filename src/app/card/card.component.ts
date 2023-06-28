@@ -1,12 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
-
-interface Pokemon {
-  id: number;
-  name: string;
-  imageUrl: string;
-}
+import { SafeUrl } from '@angular/platform-browser';
+import { Pokemon } from '../model/pokemon.models';
 
 @Component({
   selector: 'app-card',
@@ -14,49 +10,40 @@ interface Pokemon {
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  @Input() pokemon: any = { number: '', name: '', imageUrl: '' };
+  @Input() pokemon!: Pokemon;
   @Input() pokemonList: Pokemon[] = [];
-  @Output() pokemonSelected: EventEmitter<any> = new EventEmitter();
-  searchText: string = '';
-  filteredPokemonList: any[] = [];
-  imageUrl: string = '';
+  @Output() pokemonSelected: EventEmitter<string> = new EventEmitter();
+  searchText = '';
+  filteredPokemonList: Pokemon[] = [];
+  imageUrl: SafeUrl = '';
+  finalId!: string;
+  selectedPokemon!: Pokemon;
 
   constructor(private http: HttpClient, private pokemonService: PokemonService) { }
 
-  selectPokemon(pokemon: any) {
+  selectPokemon(pokemon: Pokemon) {
+    this.selectedPokemon = pokemon;
+    console.log(pokemon);
+    this.finalId = pokemon.id;
+    console.log(this.finalId);
     this.fetchPokemonDetails(pokemon);
-    this.pokemonSelected.emit(pokemon.number);
+    this.pokemonSelected.emit(pokemon.id);
   }
 
-  fetchPokemonImage() {
-    this.pokemonService.getPokemonList('https://pokeapi.co/api/v2/pokemon/' + this.pokemon.number + '/')
-      .subscribe((pokemonData: any) => {
-        this.imageUrl = pokemonData.sprites.front_default;
-        this.pokemon.name = pokemonData.name;
-      });
-      console.log(this.pokemon.name);
-      console.log(this.pokemon.number)
-  }
-
-  fetchPokemonDetails(pokemon: any) {
-    this.pokemonService.getPokemonDetails(pokemon.url)
-      .subscribe((pokemonData: any) => {
-        this.pokemon.number = pokemonData.id;
-        this.pokemon.name = pokemonData.name;
-        this.pokemon.imageUrl = pokemonData.sprites.front_default;
-        this.pokemonSelected.emit(this.pokemon);
-      });
+  fetchPokemonDetails(pokemon: Pokemon) {
+    this.pokemon = {
+      id: pokemon.id,
+      name: pokemon.name,
+      imageUrl: pokemon.imageUrl,
+    };
   }
 
   searchPokemon() {
     if (this.searchText && this.searchText.trim() !== '') {
-      const searchUrl = `https://pokeapi.co/api/v2/pokemon?limit=1000`;
-      this.http.get(searchUrl).subscribe((data: any) => {
-        const results: any[] = data.results;
-        this.filteredPokemonList = results.filter((pokemon: any) =>
-          pokemon.name && pokemon.name.toLowerCase().includes(this.searchText.toLowerCase())
-        );
-      });
+      const results: Pokemon[] = JSON.parse(localStorage.getItem('pokemon') || '{}');
+      this.filteredPokemonList = results.filter((f) => {
+        f.id === this.pokemon.id
+      }).map((m => m))
     } else {
       this.filteredPokemonList = [];
     }
