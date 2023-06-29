@@ -1,18 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../pokemon.service';
+import { Pokemon } from '../model/pokemon.models';
 import { map } from 'rxjs/operators';
 
-interface Pokemon {
-  id: number;
-  name: string;
-  imageUrl: string;
-  height: number;
-  weight: number;
-  abilities: string[];
-  types : string[];
-  // Ajoutez d'autres propriétés de détails du Pokémon ici
-}
 
 @Component({
   selector: 'app-pokemon-details',
@@ -22,6 +13,7 @@ interface Pokemon {
 export class PokemonDetailsComponent implements OnInit {
   pokemon: Pokemon | null = null;
   finalId!: number;
+  globalList: Pokemon[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,26 +21,22 @@ export class PokemonDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getPokemonList();
     const pokemonId = this.route.snapshot.paramMap.get('id');
     this.finalId = Number(pokemonId);
     if (pokemonId) {
       this.getPokemonDetails(this.finalId);
     }
   }
+  getPokemonDetails(finalId: number) {
+    throw new Error('Method not implemented.');
+  }
 
-  getPokemonDetails(pokemonId: number) {
-    this.pokemonService.getPokemonDetailsById(pokemonId).subscribe((pokemonData: any) => {
-      this.pokemon = {
-        id: pokemonData.id,
-        name: pokemonData.name,
-        imageUrl: pokemonData.sprites.front_default,
-        height: pokemonData.height,
-        weight: pokemonData.weight,
-        abilities: pokemonData.abilities.map((ability: any) => ability.ability.
-        name),
-        types: pokemonData.types.map((type: any) => type.type.name)
-        // Ajoutez d'autres propriétés de détails du Pokémon ici
-      };
-    });
+  getPokemonList() {
+    console.log('get PokemonList');
+    this.pokemonService.getPokemonSubject().subscribe({next: (pokemons: Pokemon[])=> {
+      this.globalList = pokemons;
+      console.log('global list : ', this.globalList.length);
+    },});
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Pokemon } from '../model/pokemon.models';
+import { PokemonService } from '../pokemon.service';
 
 @Component({
   selector: 'app-pokemon',
@@ -9,14 +11,19 @@ import { Observable } from 'rxjs';
 })
 export class PokemonComponent implements OnInit {
   pokemonList: any[] = [];
+  globalList: Pokemon[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private pokemonService: PokemonService) { }
 
   ngOnInit() {
 
   }
 
-  getPokemonList(url: string): Observable<any> {
-    return this.http.get(url);
+  getPokemonList() {
+    console.log('get PokemonList');
+    this.pokemonService.getPokemonSubject().subscribe({next: (pokemons: Pokemon[])=> {
+      this.globalList = pokemons;
+      console.log(this.globalList.length);
+    },});
   }
 }

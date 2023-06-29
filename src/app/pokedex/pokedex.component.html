@@ -1,10 +1,10 @@
 <app-home></app-home>
 <div class="pokedex-container">
   <div class="pokedex-grid">
-    <div *ngFor="let pokemon of pokemonList" class="pokemon-card" [routerLink]="['/pokemon', pokemon.id]">
-      <img [src]="pokemon.imageUrl" [alt]="pokemon.name">
-      <p>{{ pokemon.name }}</p>
-      <p class="id">ID: {{ pokemon.id }}</p>
+    <div *ngFor="let pokemon of globalList" class="pokemon-card" [routerLink]="['/pokemon', pokemon.pokedexId]">
+      <img [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" [alt]="pokemon.name.fr">
+      <p>{{ pokemon.name.fr }}</p>
+      <p class="id">ID: {{ pokemon.pokedexId }}</p>
     </div>
   </div>
 </div>

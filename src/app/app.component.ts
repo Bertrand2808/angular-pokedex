@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { PokemonService } from './pokemon.service';
+import { Pokemon } from './model/pokemon.models';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +18,9 @@ export class AppComponent {
   });
   router: any;
 
-  constructor() {
+  constructor(private pokemonService: PokemonService) {
     this.title$.subscribe(this.setTitle);
+    this.getPokemonList();
   }
 
   goToPokedex() {
@@ -26,6 +29,14 @@ export class AppComponent {
 
   goToSearch() {
     this.router.navigate(['/search']);
+  }
+
+  getPokemonList() {
+    this.pokemonService.getPokemonList().subscribe({next: (pokemonData: Pokemon[]) => {
+      console.log(pokemonData);
+      localStorage.setItem('pokemon', JSON.stringify(pokemonData));
+      this.pokemonService.setPokemonSubject(pokemonData);
+    }});
   }
 
   private setTitle = () => {

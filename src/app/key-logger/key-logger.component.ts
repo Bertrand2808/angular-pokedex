@@ -19,7 +19,6 @@ export class KeyLoggerComponent {
   constructor() {
     this.title$.subscribe(this.logKey);
   }
-
   // logger les touches du clavier en excluant les numériques
   logKey = (event: any) => {
     fromEvent(this.target.nativeElement, 'keydown').subscribe((res: any) => {

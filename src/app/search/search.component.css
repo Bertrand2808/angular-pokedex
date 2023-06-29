@@ -1,0 +1,20 @@
+.card {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+}
+
+.singleSelect {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  margin-top: 30px !important;
+}
+
+.cdk-overlay-container {
+  z-index: 1000;
+  text-align: center;
+
+}

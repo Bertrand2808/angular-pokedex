@@ -10,11 +10,10 @@ import { Pokemon } from '../model/pokemon.models';
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  @Input() pokemon!: Pokemon;
+  @Input() globalList: Pokemon[] = [];
   @Input() pokemonList: Pokemon[] = [];
-  @Output() pokemonSelected: EventEmitter<string> = new EventEmitter();
-  searchText = '';
-  filteredPokemonList: Pokemon[] = [];
+  @Input() pokemonSelected: Pokemon | null = null;
+
   imageUrl: SafeUrl = '';
   finalId!: string;
   selectedPokemon!: Pokemon;
@@ -22,30 +21,9 @@ export class CardComponent {
   constructor(private http: HttpClient, private pokemonService: PokemonService) { }
 
   selectPokemon(pokemon: Pokemon) {
-    this.selectedPokemon = pokemon;
     console.log(pokemon);
-    this.finalId = pokemon.id;
-    console.log(this.finalId);
-    this.fetchPokemonDetails(pokemon);
-    this.pokemonSelected.emit(pokemon.id);
   }
-
-  fetchPokemonDetails(pokemon: Pokemon) {
-    this.pokemon = {
-      id: pokemon.id,
-      name: pokemon.name,
-      imageUrl: pokemon.imageUrl,
-    };
-  }
-
-  searchPokemon() {
-    if (this.searchText && this.searchText.trim() !== '') {
-      const results: Pokemon[] = JSON.parse(localStorage.getItem('pokemon') || '{}');
-      this.filteredPokemonList = results.filter((f) => {
-        f.id === this.pokemon.id
-      }).map((m => m))
-    } else {
-      this.filteredPokemonList = [];
-    }
+  searchPokemon(event: Event) {
+    console.log(event);
   }
 }

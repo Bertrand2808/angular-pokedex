@@ -5,3 +5,6 @@ body {
   padding: 0;
   background-color: #dad1d17c;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

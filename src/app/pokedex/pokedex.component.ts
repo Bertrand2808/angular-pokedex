@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../pokemon.service';
 import { Pokemon } from '../model/pokemon.models';
+import { map } from 'rxjs';
 @Component({
   selector: 'app-pokedex',
   templateUrl: './pokedex.component.html',
@@ -9,33 +10,23 @@ import { Pokemon } from '../model/pokemon.models';
 export class PokedexComponent implements OnInit {
   pokemonList: Pokemon[] = [];
   selectedPokemon: Pokemon | null = null;
+  globalList: Pokemon[] = [];
 
-  constructor(private pokemonService: PokemonService) { }
+  constructor(private pokemonService: PokemonService) {
+    this.getPokemonList();
+   }
 
   ngOnInit() {
-    this.getPokemonList();
-  }
+
+    }
 
   getPokemonList() {
-    const results: Pokemon[] = JSON.parse(localStorage.getItem('pokemon') || '{}');
-    console.log(results);
-    results?.forEach((pokemon: any) => {
-        this.pokemonService.getPokemonDetails(this.pokemonService.baseUrl+pokemon.id).subscribe({ next: (pokemonData) => {
-          this.pokemonList.push({
-            id: pokemonData.id,
-            name: pokemonData.name,
-            imageUrl: pokemonData.imageUrl,
-          });
-        }
-      });
-    });
-  }
-
-  selectPokemon(pokemon: Pokemon) {
-    this.selectedPokemon = pokemon;
-    this.pokemonService.getPokemonDetails(this.pokemonService.baseUrl+pokemon.id).subscribe((pokemonData) => {
-      // Effectuez les actions souhaitées avec les détails du Pokémon
-      console.log('Détails du Pokémon sélectionné :', pokemonData);
-    });
+    console.log('get PokemonList');
+    this.pokemonService.getPokemonSubject().subscribe({next: async (pokemons: Pokemon[])=> {
+      if (pokemons.length > 0) {
+        this.globalList = await pokemons;
+        console.log('global list : ', this.globalList.length);
+      }
+    },});
   }
 }
