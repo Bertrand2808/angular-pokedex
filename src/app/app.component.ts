@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PokemonService } from './pokemon.service';
+import { PokemonService } from './services/pokemon.service';
 import { Pokemon } from './model/pokemon.models';
 
 @Component({
@@ -32,6 +32,7 @@ export class AppComponent {
   }
 
   getPokemonList() {
+    console.log('get PokemonList from app component');
     this.pokemonService.getPokemonList().subscribe({next: (pokemonData: Pokemon[]) => {
       console.log(pokemonData);
       localStorage.setItem('pokemon', JSON.stringify(pokemonData));

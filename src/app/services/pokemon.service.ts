@@ -4,8 +4,8 @@
 */
 import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, Subject, map } from 'rxjs';
-import { Pokemon } from './model/pokemon.models';
+import { Observable, Subject, map, of, tap } from 'rxjs';
+import { Pokemon } from '../model/pokemon.models';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,24 @@ export class PokemonService {
     return this.http.get(url);
   }
 
-  getPokemonDetailsById(pokemonId: number): Observable<any> {
-    const url = this.baseUrl+pokemonId;
-    return this.http.get(url);
+  getPokemonDetail(pokedexId: number): Observable<Pokemon> {
+    console.log('getPokemonDetail from service');
+    console.log(pokedexId);
+    return this.http.get<Pokemon>(`${this.baseUrl}/${pokedexId}`);
   }
 
+
   getPokemonList(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(this.baseUrl);
+    const pokemonsFromStorage = localStorage.getItem('pokemons');
+    if (pokemonsFromStorage) {
+      return of(JSON.parse(pokemonsFromStorage));
+    } else {
+      return this.http.get<Pokemon[]>(this.baseUrl).pipe(
+        tap((pokemons: Pokemon[]) => localStorage.setItem('pokemons', JSON.stringify(pokemons)))
+      );
+    }
   }
+
 }
+
+

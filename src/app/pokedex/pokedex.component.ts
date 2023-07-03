@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from '../services/pokemon.service';
 import { Pokemon } from '../model/pokemon.models';
-import { map } from 'rxjs';
+
 @Component({
   selector: 'app-pokedex',
   templateUrl: './pokedex.component.html',
@@ -11,22 +11,34 @@ export class PokedexComponent implements OnInit {
   pokemonList: Pokemon[] = [];
   selectedPokemon: Pokemon | null = null;
   globalList: Pokemon[] = [];
+  pokemonId!: number;
+  pokemonTypeColors: { [key: string]: string } = {
+    'Plante': '#78C850',
+    'Poison': '#A040A0',
+    'Feu': '#F08030',
+    'Vol': '#A890F0',
+    'Eau': '#6890F0',
+    'Insecte': '#A8B820',
+    'Normal': '#A8A878',
+    'Électrik': '#F8D030',
+    'Fée': '#EE99AC',
+    'Combat': '#C03028',
+    'Psy': '#F85888',
+    'Sol': '#E0C068',
+    'Acier': '#B8B8D0',
+    'Roche': '#B8A038',
+    'Glace': '#98D8D8',
+    'Dragon': '#7038F8',
+    'Ténèbres': '#705848',
+    'Spectre': '#705898',
+  };
 
   constructor(private pokemonService: PokemonService) {
-    this.getPokemonList();
    }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
+    this.pokemonService.getPokemonList().subscribe(pokemons => {
+      this.globalList = pokemons;
+      });
     }
-
-  getPokemonList() {
-    console.log('get PokemonList');
-    this.pokemonService.getPokemonSubject().subscribe({next: async (pokemons: Pokemon[])=> {
-      if (pokemons.length > 0) {
-        this.globalList = await pokemons;
-        console.log('global list : ', this.globalList.length);
-      }
-    },});
-  }
 }

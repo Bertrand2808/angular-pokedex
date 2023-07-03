@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { SearchPokemonComponent } from './search-pokemon/search-pokemon.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
     CardComponent,
     SearchComponent,
     PokemonDetailsComponent,
-    KeyLoggerComponent
+    KeyLoggerComponent,
+    SearchPokemonComponent
   ],
   imports: [
     BrowserModule,

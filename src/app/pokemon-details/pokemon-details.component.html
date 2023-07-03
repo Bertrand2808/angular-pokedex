@@ -1,3 +1,36 @@
-<div class="card">
-
+<div *ngIf="pokemon" class="pokemon-details">
+  <div class="pokemon-image-container">
+    <img [src]="pokemon.sprites.shiny?pokemon.sprites.shiny:pokemon.sprites.regular" alt="{{pokemon.name.fr}}"
+      class="img-pokemon">
+    <h2>{{pokemon.name.fr}}</h2>
+  </div>
+  <div class="detail-container" *ngIf="pokemon && pokemon.types && pokemon.types.length > 0">
+    <h3>Type: {{pokemon.types[0].name}}</h3>
+    <h3>Poids: {{pokemon.weight}}</h3>
+    <h3>Taille: {{pokemon.height}}</h3>
+  </div>
+  <div class="evolution-container">
+    <div class="evolution-container" *ngIf="pokemon?.evolution?.pre">
+      <div class="evolution-card" *ngFor="let preEvolution of pokemon?.evolution?.pre">
+        <a [routerLink]="['/pokemon', preEvolution.pokedexId]">
+          <p>Évolutions précédentes:</p>
+          <img
+            [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + preEvolution.pokedexId + '.png'"
+            alt="{{preEvolution.name}}">
+          <p>{{preEvolution.name}}</p>
+        </a>
+      </div>
+    </div>
+    <div class="evolution-container" *ngIf="pokemon?.evolution?.next">
+      <div class="evolution-card" *ngFor="let nextEvolution of pokemon?.evolution?.next">
+        <a [routerLink]="['/pokemon', nextEvolution.pokedexId]">
+          <p>Évolutions suivantes:</p>
+          <img
+            [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + nextEvolution.pokedexId + '.png'"
+            alt="{{nextEvolution.name}}">
+          <p>{{nextEvolution.name}}</p>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

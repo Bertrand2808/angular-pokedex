@@ -9,7 +9,7 @@ import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.compo
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/pokedex', pathMatch: 'full' },
   { path: 'pokedex', component: PokedexComponent },
   { path: 'home', component: HomeComponent },
   { path: 'card', component: CardComponent },

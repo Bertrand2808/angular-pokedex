@@ -1,0 +1,10 @@
+<div class="search-container">
+  <input [(ngModel)]="searchValue" (keyup)="search()" placeholder="Chercher un pokémon">
+</div>
+<div class="search-grid">
+  <div class="pokemon-card" *ngFor="let pokemon of filteredPokemons" [routerLink]="['/pokemon', pokemon.pokedexId]">
+    <img *ngIf="pokemon?.name?.fr!==''"
+      [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" alt="{{pokemon.name.fr}}">
+    <h2>{{pokemon.name.fr}}</h2>
+  </div>
+</div>

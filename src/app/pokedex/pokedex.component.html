@@ -1,8 +1,13 @@
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <app-home></app-home>
+<app-root></app-root>
+<app-search-pokemon></app-search-pokemon>
 <div class="pokedex-container">
   <div class="pokedex-grid">
     <div *ngFor="let pokemon of globalList" class="pokemon-card" [routerLink]="['/pokemon', pokemon.pokedexId]">
-      <img [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" [alt]="pokemon.name.fr">
+      <img *ngIf="pokemon && pokemon.types && pokemon.types.length > 0"
+        [style.background-color]="pokemonTypeColors[pokemon.types[0].name]"
+        [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" [alt]="pokemon.name.fr">
       <p>{{ pokemon.name.fr }}</p>
       <p class="id">ID: {{ pokemon.pokedexId }}</p>
     </div>

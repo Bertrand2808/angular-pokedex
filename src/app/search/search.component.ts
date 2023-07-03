@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, ViewChild } from '@angular/core';
-import { PokemonService } from '../pokemon.service';
+import { PokemonService } from '../services/pokemon.service';
 import { HttpClient } from '@angular/common/http';
 import { MatSelect } from '@angular/material/select';
 import { Pokemon } from '../model/pokemon.models';
