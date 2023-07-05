@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 
 export class HomeComponent {
+  isCollapsed: boolean = false;
   constructor(private router: Router) { }
   goToPokedex() {
     this.router.navigate(['/pokedex']);
@@ -21,5 +22,9 @@ export class HomeComponent {
     this.router.navigate(['/home']);
   }
 
+  toggleCollapse() {
+    console.log('toggleCollapse');
+    this.isCollapsed = !this.isCollapsed;
+  }
 
 }

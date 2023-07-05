@@ -1,15 +1,65 @@
-<div *ngIf="pokemon" class="pokemon-details">
-  <div class="pokemon-image-container">
-    <img [src]="pokemon.sprites.shiny?pokemon.sprites.shiny:pokemon.sprites.regular" alt="{{pokemon.name.fr}}"
-      class="img-pokemon">
-    <h2>{{pokemon.name.fr}}</h2>
+<app-home></app-home>
+<div *ngIf="pokemon" class="col12 MainDiv fadeIn">
+  <br>
+  <h1 class="text-center text-uppercase Section-Heading">{{ pokemon.name.fr}}</h1>
+  <div class="justify-content-center text-center" style="align-items: center; display: flex; justify-content: center;"
+    *ngIf="pokemon && pokemon.types && pokemon.types.length > 0">
+    <span style="padding: 4px" class="category text-capitalize rounded fadeIn"
+      [style.background-color]="pokemonTypeColors[pokemon.types[0].name]"> {{pokemon.category}}
+    </span>
   </div>
-  <div class="detail-container" *ngIf="pokemon && pokemon.types && pokemon.types.length > 0">
-    <h3>Type: {{pokemon.types[0].name}}</h3>
-    <h3>Poids: {{pokemon.weight}}</h3>
-    <h3>Taille: {{pokemon.height}}</h3>
+  <div class=" row justify-content-center" style="position: relative;padding-bottom: 3rem;">
+    <div class="col-lg-3 col-md-2 bioDiv d-flex flex-wrap justify-content-center">
+      <div class="inner">
+        <table class="table table-borderless">
+          <tr>
+            <td class="text-right font-weight-bold">ID</td>
+            <td>#{{pokemon.pokedexId}}</td>
+          </tr>
+          <tr>
+            <td class="text-right font-weight-bold">Height</td>
+            <td class="font-detail" style="white-space: nowrap;">{{ pokemon.height}}</td>
+          </tr>
+          <tr>
+            <td class="text-right font-weight-bold">Weight</td>
+            <td class="font-detail" style="white-space: nowrap;">{{pokemon.weight}}</td>
+          </tr>
+          <tr>
+            <td class="text-right font-weight-bold">Talents</td>
+            <td>
+              <span class="talents" *ngFor="let talent of pokemon.talents; let i=index">
+                <ng-container *ngIf="i==2"><br></ng-container>
+                <span *ngIf="pokemon && pokemon.types && pokemon.types.length > 0 && pokemon.talents"
+                  class="talent text-uppercase font-detail"
+                  [style.background-color]="pokemonTypeColors[pokemon.types[0].name]" role="button"
+                  style="white-space:nowrap; color: white;"
+                  [ngStyle]="{'display':i==2?'inline-block':'unset','margin-top':i==2?'5px':'0px'}">{{talent.name}}</span>
+              </span>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-right font-weight-bold" style="vertical-align: middle;">Type</td>
+            <td>
+              <div class="row" style="flex-wrap: nowrap" data-toggle="modal" data-target="#typesModal">
+                <div class="text-capitalize row icon" *ngFor="let type of pokemon.types">
+                  <span class="col-8 font-detail" style="color:gray; padding-right: 1px;">{{type.name}}</span>
+                  <span class="col-4"><img [src]="type.image" alt="" class="img-fluid"
+                      style="width: 30px; margin-left: 5px;"></span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-5 d-flex flex-wrap align-items-center">
+      <div class="image-container">
+        <img class="Image img-fluid mx-auto my-auto d-block"
+          [src]="pokemon.sprites.shiny?pokemon.sprites.shiny:pokemon.sprites.regular" alt="{{pokemon.name.fr}}">
+      </div>
+    </div>
   </div>
-  <div class="evolution-container">
+  <div class="evolution-container" style="padding-bottom: 3rem">
     <div class="evolution-container" *ngIf="pokemon?.evolution?.pre">
       <div class="evolution-card" *ngFor="let preEvolution of pokemon?.evolution?.pre">
         <a [routerLink]="['/pokemon', preEvolution.pokedexId]">

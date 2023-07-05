@@ -1,7 +1,10 @@
 <div class="home-container">
-  <img src="assets/pokemon_logo.png" alt="Pokémon Logo" class="logo">
-  <div class="button-container-nav">
+  <img src="assets/pokemon_logo.png" alt="Pokémon Logo" class="logo" [ngClass]="{'collapsed': isCollapsed}">
+  <div class="button-container-nav" [ngClass]="{'collapsed': isCollapsed}">
     <button class="button" (click)="goToPokedex()">Pokédex</button>
     <button class="button" (click)="goToSearch()">Profil Dresseur</button>
   </div>
+  <br>
+  <button (click)="toggleCollapse()">{{ isCollapsed ? 'Afficher' : 'Réduire' }}</button>
+
 </div>
