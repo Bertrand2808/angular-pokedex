@@ -1,0 +1,55 @@
+.starter-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+.starter-image {
+  z-index: -1;
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dialog {
+  position: absolute;
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 24px;
+}
+
+
+.pokemon-card {
+  width: 20%;
+  margin: 1%; /* On ajoute une marge autour de chaque carte */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: white;
+  text-align: center;
+}
+
+
+.pokemon-card img {
+  width: 100%;
+  height: auto;
+}
+
+.pokemon-card p {
+  margin: 10px 0;
+}
+
+.id {
+  font-size: 0.8em;
+  color: gray;
+}
+

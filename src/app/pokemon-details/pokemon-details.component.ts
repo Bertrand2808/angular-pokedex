@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../services/pokemon.service';
 import { Pokemon } from '../model/pokemon.models';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -42,6 +44,7 @@ export class PokemonDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private pokemonService: PokemonService
   ) {
     this.paramsSubscription = new Subscription();
@@ -62,6 +65,10 @@ export class PokemonDetailsComponent implements OnInit {
   ngOnDestroy() {
     this.paramsSubscription.unsubscribe();
   }
+
+  goToChoice(){
+    this.router.navigate(['/choice']);
+    }
 
 }
 

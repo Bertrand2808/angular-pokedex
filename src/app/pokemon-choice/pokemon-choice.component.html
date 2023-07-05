@@ -1,0 +1,11 @@
+<app-home></app-home>
+<div class="starter-container">
+  <img *ngIf="showStarterImage" src="assets/pokemon_choice.jpg" class="starter-image" alt="" />
+  <div *ngIf="showDialog" class="dialog" (click)="hideDialogAndShowPokemon()">Choisissez votre Pokémon !</div>
+  <ng-container *ngIf="showPokemon">
+    <div class="pokemon-card" *ngFor="let pokemon of randomPokemons" class="pokemon-card" (click)="openDialog(pokemon)">
+      <img [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" [alt]="pokemon.name.fr">
+      <p>{{ pokemon.name.fr }}</p>
+    </div>
+  </ng-container>
+</div>

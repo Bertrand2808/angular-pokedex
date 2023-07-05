@@ -57,5 +57,15 @@ home-container.collapsed {
   padding: 0;
 }
 
+.button-collapse {
+  width: 50px;
+  height: 50px;
+  margin-top: -10px;
+}
 
+.button-collapse:hover {
+  transition: width 0.3s ease, height 0.3s ease;
+  width: 70px;
+  height: 70px;
+}
 

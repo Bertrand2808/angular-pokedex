@@ -1,6 +1,0 @@
-<div class="card">
-  <img *ngIf="pokemonSelected?.name?.fr!==''"
-    [src]="pokemonSelected?.sprites?.shiny ? pokemonSelected?.sprites?.shiny : pokemonSelected?.sprites?.regular"
-    [alt]="pokemonSelected?.name?.fr" class="card-image">
-  <h3 *ngIf="pokemonSelected?.name?.fr" class="card-title">{{ pokemonSelected?.name?.fr }}</h3>
-</div>

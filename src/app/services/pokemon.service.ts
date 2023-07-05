@@ -11,6 +11,7 @@ import { Pokemon } from '../model/pokemon.models';
   providedIn: 'root'
 })
 export class PokemonService {
+  private chosenPokemons: Pokemon[] = [];
 
   baseUrl = "https://api-pokemon-fr.vercel.app/api/v1/pokemon"
   pokemonSubject: Subject<Pokemon[]> = new Subject<Pokemon[]>();
@@ -44,6 +45,14 @@ export class PokemonService {
         tap((pokemons: Pokemon[]) => localStorage.setItem('pokemons', JSON.stringify(pokemons)))
       );
     }
+  }
+
+  addChosenPokemon(pokemon: Pokemon) {
+    this.chosenPokemons.push(pokemon);
+  }
+
+  getChosenPokemons(): Pokemon[] {
+    return this.chosenPokemons;
   }
 
 }

@@ -1,0 +1,21 @@
+<app-home></app-home>
+<form [formGroup]="trainerForm" (ngSubmit)="onSubmit()">
+  <label for="pseudo">Pseudo:</label>
+  <input type="text" id="pseudo" formControlName="pseudo">
+  <label for="age">Age:</label>
+  <input type="number" id="age" formControlName="age">
+  <button type="submit" [disabled]="!trainerForm.valid">Submit</button>
+</form>
+<div *ngIf="trainerData">
+  <p *ngIf="trainerData.pseudo && trainerData.age">Pseudo: {{ trainerData.pseudo }}, Age: {{ trainerData.age }}</p>
+
+  <div class="container">
+    <!-- Votre contenu de carte de dresseur ici -->
+    <div class="sidebar">
+      <div *ngFor="let pokemon of chosenPokemons" class="pokemon-card">
+        <img [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" [alt]="pokemon.name.fr">
+        <p>{{ pokemon.name.fr }}</p>
+      </div>
+    </div>
+  </div>
+</div>

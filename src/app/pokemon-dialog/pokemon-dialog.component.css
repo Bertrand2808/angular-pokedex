@@ -1,0 +1,32 @@
+.dial-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dial-container h1 {
+  margin-top: 20px;
+  opacity: 1;
+  transition: opacity .6s ease-in-out;
+  color: #6d6d6d;
+}
+
+.dial-container img {
+  margin: 30px 0;
+}
+
+.dial-container button {
+  margin-bottom: 20px;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #e00000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

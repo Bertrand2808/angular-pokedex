@@ -8,6 +8,7 @@ import { Pokemon } from '../model/pokemon.models';
   styleUrls: ['./pokedex.component.css']
 })
 export class PokedexComponent implements OnInit {
+  isLoading: boolean = false;
   pokemonList: Pokemon[] = [];
   selectedPokemon: Pokemon | null = null;
   globalList: Pokemon[] = [];
@@ -39,6 +40,11 @@ export class PokedexComponent implements OnInit {
   ngOnInit(): void {
     this.pokemonService.getPokemonList().subscribe(pokemons => {
       this.globalList = pokemons;
+      console.log(this.isLoading)
+      this.isLoading = false;
       });
     }
+
+
+
 }

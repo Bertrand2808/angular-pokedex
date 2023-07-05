@@ -1,0 +1,11 @@
+<div class="dial-container">
+  <ng-container *ngIf=data.pokemon.types>
+    <h1>{{data.pokemon.name.fr}}</h1>
+    <p *ngFor="let type of data.pokemon.types">Type: {{type.name}}</p>
+    <p>Height: {{data.pokemon.height}}</p>
+    <p>Weight: {{data.pokemon.weight}}</p>
+    <img [src]="data.pokemon.sprites.shiny ? data.pokemon.sprites.shiny : data.pokemon.sprites.regular"
+      [alt]="data.pokemon.name.fr">
+    <button (click)="selectPokemon(data.pokemon)" class="button">Choisir {{data.pokemon.name.fr}}</button>
+  </ng-container>
+</div>

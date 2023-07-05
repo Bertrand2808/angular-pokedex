@@ -14,12 +14,15 @@ export class HomeComponent {
     this.router.navigate(['/pokedex']);
   }
 
-  goToSearch() {
-    this.router.navigate(['/search']);
+  goToTrainer() {
+    this.router.navigate(['/trainer']);
   }
 
   goToHome() {
     this.router.navigate(['/home']);
+  }
+  goToChoice() {
+    this.router.navigate(['/choice']);
   }
 
   toggleCollapse() {

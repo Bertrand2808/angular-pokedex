@@ -2,9 +2,11 @@
   <img src="assets/pokemon_logo.png" alt="Pokémon Logo" class="logo" [ngClass]="{'collapsed': isCollapsed}">
   <div class="button-container-nav" [ngClass]="{'collapsed': isCollapsed}">
     <button class="button" (click)="goToPokedex()">Pokédex</button>
-    <button class="button" (click)="goToSearch()">Profil Dresseur</button>
+    <button class="button" (click)="goToTrainer()">Profil Dresseur</button>
+    <button class="button" (click)="goToChoice()">Choisir un pokemon</button>
   </div>
   <br>
-  <button (click)="toggleCollapse()">{{ isCollapsed ? 'Afficher' : 'Réduire' }}</button>
+  <img (click)="toggleCollapse()" src="assets/pokemon.png" alt="" class="button-collapse"
+    title="Display / Collaspe logo">
 
 </div>

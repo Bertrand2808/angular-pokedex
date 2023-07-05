@@ -2,7 +2,10 @@
 <app-home></app-home>
 <app-root></app-root>
 <app-search-pokemon></app-search-pokemon>
-<div class="pokedex-container">
+<div *ngIf="isLoading">
+  <p>Chargement</p>
+</div>
+<div *ngIf="!isLoading" class="pokedex-container">
   <div class="pokedex-grid">
     <div *ngFor="let pokemon of globalList" class="pokemon-card" [routerLink]="['/pokemon', pokemon.pokedexId]">
       <img *ngIf="pokemon && pokemon.types && pokemon.types.length > 0"
