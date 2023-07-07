@@ -6,9 +6,8 @@
 }
 
 .starter-image {
-  z-index: -1;
   position: absolute;
-  width: 70%;
+  width: 40%;
   height: 70%;
   left: 50%;
   top: 50%;
@@ -16,6 +15,7 @@
 }
 
 .dialog {
+  z-index: 1;
   position: absolute;
   background-color: white;
   border: 2px solid black;
@@ -29,6 +29,7 @@
 
 
 .pokemon-card {
+  z-index: 1;
   width: 20%;
   margin: 1%; /* On ajoute une marge autour de chaque carte */
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -36,6 +37,8 @@
   overflow: hidden;
   background-color: white;
   text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
 }
 
 

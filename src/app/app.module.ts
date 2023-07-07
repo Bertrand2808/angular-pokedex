@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PokedexComponent } from './pokedex/pokedex.component';
-import { HomeComponent } from './home/home.component';
+import { MenuComponent } from './menu/menu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PokemonDetailsComponent } from './pokemon-details/pokemon-details.component';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
@@ -14,24 +14,24 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { SearchPokemonComponent } from './search-pokemon/search-pokemon.component';
-import { HeaderComponent } from './header/header.component';
 import { PokemonChoiceComponent } from './pokemon-choice/pokemon-choice.component';
 import { PokemonDialogComponent } from './pokemon-dialog/pokemon-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrainerCardComponent } from './trainer-card/trainer-card.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PokedexComponent,
-    HomeComponent,
+    MenuComponent,
     PokemonDetailsComponent,
     KeyLoggerComponent,
     SearchPokemonComponent,
-    HeaderComponent,
     PokemonChoiceComponent,
     PokemonDialogComponent,
-    TrainerCardComponent
+    TrainerCardComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

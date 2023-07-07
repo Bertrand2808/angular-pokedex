@@ -44,14 +44,12 @@ export class PokemonChoiceComponent implements OnInit {
   }
 
   openDialog(pokemon: Pokemon) {
+    console.log(pokemon);
     const dialogRef = this.dialog.open(PokemonDialogComponent, {
-        data: {pokemon: pokemon}
-    });
+        data: {pokemon: pokemon},
 
-    dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
     });
-}
+  }
   hideDialogAndShowPokemon() {
     this.showDialog = false;
     this.showPokemon = true;

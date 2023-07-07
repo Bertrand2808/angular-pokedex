@@ -1,16 +1,17 @@
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<app-home></app-home>
+<app-menu></app-menu>
 <app-root></app-root>
 <app-search-pokemon></app-search-pokemon>
-<div *ngIf="isLoading">
-  <p>Chargement</p>
+<div *ngIf="isLoading" class=" d-flex justify-content-center" style="margin-top: 200px;">
+  <div class="spinner-border" role="status">
+    <span class="sr-only" style="margin-left: 5px;">Loading...</span>
+  </div>
 </div>
 <div *ngIf="!isLoading" class="pokedex-container">
   <div class="pokedex-grid">
     <div *ngFor="let pokemon of globalList" class="pokemon-card" [routerLink]="['/pokemon', pokemon.pokedexId]">
       <img *ngIf="pokemon && pokemon.types && pokemon.types.length > 0"
         [style.background-color]="pokemonTypeColors[pokemon.types[0].name]"
-        [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" [alt]="pokemon.name.fr">
+        [src]="pokemon.sprites.regular?pokemon.sprites.regular:pokemon.sprites.shiny" alt="{{pokemon.name.fr}}">
       <p>{{ pokemon.name.fr }}</p>
       <p class="id">ID: {{ pokemon.pokedexId }}</p>
     </div>

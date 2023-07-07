@@ -17,14 +17,22 @@ export class PokemonService {
   pokemonSubject: Subject<Pokemon[]> = new Subject<Pokemon[]>();
   constructor(private http: HttpClient) { }
 
+/**getteur Objet de type Pokemon [] dispo dans toute l' app s'appelle comme un observable avec un subscribe */
   getPokemonSubject(): Observable<Pokemon[]> {
     this.pokemonSubject.next(JSON.parse(localStorage.getItem('pokemon') || '{}'));
     return this.pokemonSubject.asObservable();
   }
 
+/**setteur pour set le subject de type pokemon par exemple a la 1ere connexion ou au rafraichissement */
   setPokemonSubject(pokemonSubject: Pokemon[]) {
     this.pokemonSubject.next(pokemonSubject);
   }
+  /**Vide le local storage */
+  resetListInStorage(){
+    localStorage.removeItem('pokemon');
+  }
+
+
   getPokemonDetails(url: string): Observable<any> {
     return this.http.get(url);
   }
@@ -37,18 +45,12 @@ export class PokemonService {
 
 
   getPokemonList(): Observable<Pokemon[]> {
-    const pokemonsFromStorage = localStorage.getItem('pokemons');
-    if (pokemonsFromStorage) {
-      return of(JSON.parse(pokemonsFromStorage));
-    } else {
-      return this.http.get<Pokemon[]>(this.baseUrl).pipe(
-        tap((pokemons: Pokemon[]) => localStorage.setItem('pokemons', JSON.stringify(pokemons)))
-      );
-    }
+      return this.http.get<Pokemon[]>(this.baseUrl);
   }
 
   addChosenPokemon(pokemon: Pokemon) {
     this.chosenPokemons.push(pokemon);
+
   }
 
   getChosenPokemons(): Pokemon[] {
@@ -56,5 +58,3 @@ export class PokemonService {
   }
 
 }
-
-

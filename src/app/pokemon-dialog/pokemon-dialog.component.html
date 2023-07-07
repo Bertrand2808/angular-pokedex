@@ -4,8 +4,8 @@
     <p *ngFor="let type of data.pokemon.types">Type: {{type.name}}</p>
     <p>Height: {{data.pokemon.height}}</p>
     <p>Weight: {{data.pokemon.weight}}</p>
-    <img [src]="data.pokemon.sprites.shiny ? data.pokemon.sprites.shiny : data.pokemon.sprites.regular"
-      [alt]="data.pokemon.name.fr">
+    <img [src]="data.pokemon.sprites.regular?data.pokemon.sprites.regular:data.pokemon.sprites.shiny"
+      alt="{{data.pokemon.name.fr}}">
     <button (click)="selectPokemon(data.pokemon)" class="button">Choisir {{data.pokemon.name.fr}}</button>
   </ng-container>
 </div>

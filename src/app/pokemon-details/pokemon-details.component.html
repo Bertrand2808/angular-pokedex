@@ -1,4 +1,4 @@
-<app-home></app-home>
+<app-nav-bar></app-nav-bar>
 <div *ngIf="pokemon" class="col12 MainDiv fadeIn">
   <br>
   <h1 class="text-center text-uppercase Section-Heading">{{ pokemon.name.fr}}</h1>
@@ -55,12 +55,12 @@
     <div class="col-lg-5 d-flex flex-wrap align-items-center">
       <div class="image-container">
         <img class="Image img-fluid mx-auto my-auto d-block"
-          [src]="pokemon.sprites.shiny?pokemon.sprites.shiny:pokemon.sprites.regular" alt="{{pokemon.name.fr}}">
+          [src]="pokemon.sprites.regular?pokemon.sprites.regular:pokemon.sprites.shiny" alt="{{pokemon.name.fr}}">
       </div>
     </div>
   </div>
   <div class="btn-choice-container" style="justify-content: center; ">
-    <button class="button-choice" (click)="goToChoice()">Lancer
+    <button class="button-choice" (click)="selectPokemon(pokemon)">Lancer
       une pokéball !</button>
   </div>
   <div class="evolution-container" style="padding-bottom: 3rem">

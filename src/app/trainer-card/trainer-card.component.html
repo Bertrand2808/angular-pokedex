@@ -1,21 +1,58 @@
-<app-home></app-home>
-<form [formGroup]="trainerForm" (ngSubmit)="onSubmit()">
-  <label for="pseudo">Pseudo:</label>
-  <input type="text" id="pseudo" formControlName="pseudo">
-  <label for="age">Age:</label>
-  <input type="number" id="age" formControlName="age">
-  <button type="submit" [disabled]="!trainerForm.valid">Submit</button>
+<app-nav-bar></app-nav-bar>
+<form *ngIf="!isSubmited" [formGroup]="trainerForm" (ngSubmit)="onSubmit()" class="p-5">
+  <h1 class="text-center">Création de votre dresseur !</h1>
+  <div class="form-group">
+    <label for="pseudo">Pseudo:</label>
+    <input type="text" id="pseudo" formControlName="pseudo" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="age">Age:</label>
+    <input type="number" id="age" formControlName="age" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="sexe">Sexe:</label>
+    <select formControlName="sexe" id="sexe" name="sexe" class="form-control">
+      <option value="">Sélectionnez votre sexe</option>
+      <option value="1">Homme</option>
+      <option value="2">Femme</option>
+    </select>
+  </div>
+  <button type="submit" [disabled]="!trainerForm.valid" class="btn btn-primary">Submit</button>
 </form>
-<div *ngIf="trainerData">
-  <p *ngIf="trainerData.pseudo && trainerData.age">Pseudo: {{ trainerData.pseudo }}, Age: {{ trainerData.age }}</p>
 
-  <div class="container">
-    <!-- Votre contenu de carte de dresseur ici -->
-    <div class="sidebar">
-      <div *ngFor="let pokemon of chosenPokemons" class="pokemon-card">
-        <img [src]="pokemon?.sprites?.shiny ? pokemon.sprites.shiny : pokemon.sprites.regular" [alt]="pokemon.name.fr">
-        <p>{{ pokemon.name.fr }}</p>
-      </div>
+<div *ngIf="isSubmited" class="row w-100 text-center container-fluid">
+  <div class="col">
+    <p>Pseudo : {{ trainerForm.controls["pseudo"].value }} </p>
+  </div>
+  <div class="col">
+    <p>Age : {{ trainerForm.controls["age"].value }}</p>
+  </div>
+  <div class="col">
+    <p> Pokemons attrapés : {{ chosenPokemons.length}} /6</p>
+  </div>
+</div>
+
+<div *ngIf="isSubmited" class="d-flex w-100 mx-0 px-0 container-fluid">
+  <!-- Bloc gauche pour les pokemons -->
+  <div class="w30 text-center w-100 mx-0 px- pokemon-card">
+    <div class="pokemon-container" *ngFor=" let pokemon of chosenPokemons.slice(0,3); let i=index">
+      <img class="pokemon-img" [src]="pokemon.sprites.regular?pokemon.sprites.regular:pokemon.sprites.shiny"
+        alt="{{pokemon.name.fr}}" [routerLink]="['/pokemon', pokemon.pokedexId]">
+      <p>{{ pokemon.name.fr }}</p>
+    </div>
+  </div>
+  <!-- Bloc central pour l'image du dresseur -->
+  <div class="w60 trainer-img text-center h-100 mx-0 px-0">
+    <img *ngIf="isSubmited"
+      src="{{ trainerForm.controls['sexe'].value === '1' ? trainerObject[0].url : trainerObject[1].url }}"
+      alt="Trainer Img" />
+  </div>
+  <!-- Bloc droit pour les pokemons -->
+  <div class="w30 text-center w-100 mx-0 px-0 pokemon-card">
+    <div class="pokemon-container" *ngFor="let pokemon of chosenPokemons.slice(3,6); let i = index">
+      <img class="pokemon-img" [src]="pokemon.sprites.regular?pokemon.sprites.regular:pokemon.sprites.shiny"
+        alt="{{pokemon.name.fr}}" [routerLink]="['/pokemon', pokemon.pokedexId]">
+      <p>{{ pokemon.name.fr }}</p>
     </div>
   </div>
 </div>

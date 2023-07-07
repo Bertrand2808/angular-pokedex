@@ -2,14 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background-color: #f8f8f8;
-  border: 1px solid #e00000;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   padding: 20px;
-  max-width: 100%;
-  max-height: 700px;
-  margin: 0 auto;
   border-radius: 5px;
 }
 
@@ -18,12 +13,7 @@ home-container.collapsed {
 }
 .logo {
   max-width: 500px;
-  height: auto;
   margin-bottom: 20px;
-}
-.button-container {
-  display: flex;
-  gap: 10px;
 }
 
 .button-container-nav {
@@ -32,7 +22,6 @@ home-container.collapsed {
 }
 
 .button {
-  padding: 10px 20px;
   font-size: 16px;
   font-weight: bold;
   background-color: #e00000;
@@ -43,7 +32,7 @@ home-container.collapsed {
 }
 
 .button:hover {
-  background-color: #b50000;
+  background-color: #e66060;
 }
 
 .home-container {

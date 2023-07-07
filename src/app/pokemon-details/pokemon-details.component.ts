@@ -1,11 +1,10 @@
+import { TrainerService } from './../services/trainer.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PokemonService } from '../services/pokemon.service';
 import { Pokemon } from '../model/pokemon.models';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-pokemon-details',
@@ -14,13 +13,16 @@ import { Router } from '@angular/router';
 })
 export class PokemonDetailsComponent implements OnInit {
   paramsSubscription: Subscription;
-
+  trainerData!: { pseudo: string; age: number; };
+  trainer!: { pseudo: string; age: number; image: string; pokemons: Pokemon[]; };
   pokemon: Pokemon | null = null;
   finalId!: number;
   globalList: Pokemon[] = [];
   pokemonId!: number;
   preEvolutionPokemon: Pokemon | null = null;
   nextEvolutionPokemon: Pokemon | null = null;
+  pokemonArrayService: Pokemon[] = [];
+
   pokemonTypeColors: { [key: string]: string } = {
     'Plante': '#78C850',
     'Poison': '#A040A0',
@@ -45,7 +47,8 @@ export class PokemonDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private trainerService: TrainerService
   ) {
     this.paramsSubscription = new Subscription();
   }
@@ -66,9 +69,29 @@ export class PokemonDetailsComponent implements OnInit {
     this.paramsSubscription.unsubscribe();
   }
 
-  goToChoice(){
-    this.router.navigate(['/choice']);
+  selectPokemon(pokemon: Pokemon) {
+    const trainerFromStorage = this.trainerService.getTrainer();
+    if (trainerFromStorage) {
+      this.trainer = trainerFromStorage;  // Initialisez votre trainer avec les données du local storage
+      if (this.trainer.pokemons && this.trainer.pokemons.some(p => p.pokedexId === pokemon.pokedexId)) {
+        window.alert('Ce Pokémon est déjà dans votre équipe!');
+        return;
+      }
+      if (this.trainer.pokemons && this.trainer.pokemons.length >= 6) {
+        window.alert('Vous avez déjà 6 Pokémon dans votre équipe!');
+        return;
+      }
+      this.pokemonService.addChosenPokemon(pokemon);
+      this.trainer.pokemons = this.trainer.pokemons ?? [];
+      this.trainer.pokemons.push(pokemon);
+      this.trainerService.setTrainer(this.trainer);
+      this.router.navigate(['/trainer']);
+    } else {
+      // Si il n'y a pas de trainer dans le local storage, naviguez vers la page du trainer
+      // ou créez un nouveau trainer, selon les besoins de votre application
+      this.router.navigate(['/trainer']);
     }
+  }
+
 
 }
-
