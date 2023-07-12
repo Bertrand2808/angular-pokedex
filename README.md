@@ -45,10 +45,14 @@ Pour lancer le projet, il suffit de lancer la commande suivante :
   * Redirection vers la page de détail du pokemon au clic sur la card.
 * Possibilité de reset le dresseur et son équipe
 
+*** Routes : /trainer ***
+
 ### Choix de pokemons
 
 * Petite animation nostalgique de choix de pokemon des anciennes versions GBA avec une choix entre trois pokemons aléatoires.
   * Redirection vers la page de la carte du dresseur une fois le pokemon choisi.
+
+*** Routes : /choice ***
 
 ## Autres :
 - `Cours.md` : Notes prises lors des cours Angular de M. BENDAHMANE.
