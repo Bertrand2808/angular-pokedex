@@ -125,3 +125,23 @@
 .pokemon-img:hover {
   transform: scale(1.1);
 }
+
+.button-container-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.button-container-nav .button {
+  background-color: #00f836;
+  color: rgb(3, 3, 3);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container-nav .button:hover {
+  background-color: #c82333;
+}

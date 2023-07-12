@@ -19,6 +19,7 @@ import { PokemonDialogComponent } from './pokemon-dialog/pokemon-dialog.componen
 import { MatDialogModule } from '@angular/material/dialog';
 import { TrainerCardComponent } from './trainer-card/trainer-card.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { TronqTextPipe } from './tronq-text.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     PokemonChoiceComponent,
     PokemonDialogComponent,
     TrainerCardComponent,
-    NavBarComponent
+    NavBarComponent,
+    TronqTextPipe
   ],
   imports: [
     BrowserModule,

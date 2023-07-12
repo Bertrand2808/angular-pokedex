@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../model/pokemon.models';
 import { PokemonService } from '../services/pokemon.service';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Location } from '@angular/common';
 import { TrainerService } from '../services/trainer.service';
 
 @Component({
@@ -23,6 +24,7 @@ export class TrainerCardComponent implements OnInit {
     private formBuilder: FormBuilder,
     private pokemonService: PokemonService,
     private trainerService: TrainerService,
+    private location: Location,
   ) {
     this.trainerObject =  [ {id: "1", url: '../../assets/boy.png'}, {id: "2", url: '../../assets/girl.png'}];
     this.trainerForm = this.formBuilder.group({
@@ -76,7 +78,24 @@ export class TrainerCardComponent implements OnInit {
     });
   }
 
-  getChoosePokemon() {
+  deleteTrainer() {
+    // delete trainer from local storage
+    this.trainerService.deleteTrainer();
+    // delete pokemon team
+    this.pokemonService.deleteChosenPokemons();
+    // delete trainer from component
+    this.trainer = {
+      name: '',
+      age: 0,
+      image: '',
+      pokemons: []
+    };
+    this.trainerForm.reset();
+    this.refreshPage();
+    this.isSubmited = false;
+  }
 
+  refreshPage() {
+    window.location.reload();
   }
 }

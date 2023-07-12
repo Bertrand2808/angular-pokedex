@@ -489,6 +489,7 @@ export class AppComponent {
 
 }
 ```
+
 On a créé une propriété `title$` de type `Observable`. Ici, l'observable `title$` est créé dans le constructeur de la classe `AppComponent`.
 
 Il prend en paramètre une fonction `observer` qui est appelée à chaque fois que quelqu'un utilisera l'observable. Cette fonction prend en paramètre une fonction `next` qui permet de notifier l'observable. Ici, on appelle la fonction `next` toutes les 2 secondes. On peut également notifier l'observable avec la fonction `complete` qui permet de notifier la fin de l'observable.
@@ -542,6 +543,7 @@ export class KeyLoggerComponent {
 ### Communiquer avec des services qui utilisent http
 
 Le but :
+
 - envoyer/recevoir des données avec le protocole http
 - découvrir le client http d'Angular
 - mettre en place un backend
@@ -592,8 +594,8 @@ request$.subscribe(httpResponse) => {
   });
 ```
 
-
 Ici on a :
+
 - créé une constante `url` qui contient l'URL de l'API `jsonplaceholder` qui permet de récupérer des données.
 - créé un observable `request$` qui va faire une requête http pour récupérer les données de l'API.
 - créé un `subscriber` qui va être notifié à chaque fois que l'observable `request$` est notifié.
@@ -606,6 +608,7 @@ Ici on a :
 ## Les routeurs
 
 Le but :
+
 - étudier le projet fourni
 - mettre en place un routage simple
 - à l'aide de la documentation officielle, déterminer quelles fonctionnalités de router sont utilisées dans le projet fourni
@@ -614,12 +617,13 @@ Le but :
 
 Le framework Angular propose deux approches pour les formulaires : `template-driven` et `reactive`. Aucune des deux approches n'est meilleure que l'autre, elles sont complémentaires.
 La grande différence réside dans la façon dont sont gérées les données du formulaire :
+
 - `template-driven` : les données sont gérées par le template, facile à mettre en place mais sont difficiles à tester, leur fonctionnement depend est basé sur les mécanismes de détéction des changements d'Angular.
 - `reactive forms` : les données sont gérées par le code, plus difficile à mettre en place mais plus facile à tester, leur fonctionnement est basé sur les observables de RxJS. Ils sont mis en place au niveau du composant. Ils permettent de gérer les données au travers d'un `form-model`.
 
 En hmtl :
 
-  ```html
+```html
   <form action="" method="post">
     <div>
       <input type="text" id="name" name="name" />
@@ -634,7 +638,7 @@ En hmtl :
     </div>
     <button type="submit">Login</button>
   </form>
-  ```
+```
 
 En Angular, ngModel permet de lier les données du formulaire au modèle de données du composant.
 
@@ -655,6 +659,7 @@ En Angular, ngModel permet de lier les données du formulaire au modèle de donn
 ```
 
 Ici, on a :
+
 - créé un formulaire avec la directive `ngSubmit` qui permet d'appeler la fonction `changePrice` du composant.
 - créé un input avec la directive `ngModel` qui permet de lier les données du formulaire au modèle de données du composant.
 
@@ -663,6 +668,7 @@ Les formulaires template-driven sont utiles pour les petits formulaires, ils son
 ### Les formulaires réactifs
 
 Les classes clés de ces types de formulaires sont :
+
 - `FormControl` : représente un champ de formulaire tel qu'un `<input>`, il permet de gérer la valeur du champ, son état de validité et son état de modification.
 - `FormGroup` : représente un groupe de champs de formulaire tel qu'un `<form>`, il permet de gérer la valeur du groupe, son état de validité et son état de modification.
 - `FormArray` : représente un tableau de champs de formulaire, il permet de gérer la valeur du tableau, son état de validité et son état de modification. Il peut être modifié à l'exécution (ajout et suppression dynamique de FormControl possible).
@@ -673,7 +679,7 @@ Exemple :
 
 on a d'un côté le fichier ts :
 
-  ```typescript
+```typescript
   import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { priceRangeValidator } from '../price-range.directive';
@@ -720,13 +726,14 @@ export class ProductCreateComponent implements OnInit {
   }
 
 }
-  ```
+```
 
   et le html correspondant :
 
     ```html
     <form [formGroup]="productForm" (ngSubmit)="createProduct()">
-  <div>
+
+<div>
     <label for="name">Name</label>
     <input id="name" formControlName="name" required />
     <span *ngIf="name.touched && name.invalid">
@@ -753,6 +760,7 @@ export class ProductCreateComponent implements OnInit {
     ```
 
 On a donc ici :
+
 - créé un formulaire avec la directive `formGroup` qui permet de lier les données du formulaire au modèle de données du  qui permet d'appeler la fonction `createProduct()` du composant lorsque le formulaire est soumis.
 - créé un input avec la directive `formControlName` qui permet de lier les données du formulaire au modèle de données du composant qui permet de gérer la valeur du champ, son état de validité et son état de modification.
 
@@ -792,6 +800,7 @@ input.ng-dirty.ng-invalid {
   border-color: 3px solid red;
 }
 ```
+
 Pour que le contrôle soit valide on peut ajouter un attribut `required` à l'input. On peut aussi ajouter un attribut `min` et `max` pour définir une valeur minimale et maximale.
 Cette technique de validation vaut pour les deux types de formulaires.
 
@@ -809,6 +818,7 @@ export function priceRangeValidator(): ValidatorFn {
 Ici on a créé une fonction qui retourne une fonction qui prend en paramètre un `AbstractControl` et retourne un objet `ValidationErrors` ou `null`. On peut donc utiliser cette fonction pour créer un validateur personnalisé. On peut ensuite utiliser ce validateur dans le tableau des validateurs du `FormControl`.
 
 A noter qu'il existe des méthodes de `AbstractControl` qui permettent de manipuler les données de formulaires :
+
 - `setValue()` : permet de définir la valeur du champ : remplace toutes les valeurs des controls du form :
 
 ```typescript
@@ -817,6 +827,7 @@ this.productForm.setValue({
   price: 10
 });
 ```
+
 Set value est utile prend en paramètre un objet qui contient toutes les valeurs des controls du form.
 
 - `patchValue()` : permet de mettre à jours les valeurs de controls specifiques du form :
@@ -826,6 +837,7 @@ this.productForm.patchValue({
   name: 'test'
 });
 ```
+
 - `reset()` : permet de réinitialiser la valeur du champ à sa valeur initiale.
 
 A noter que la métholde valueChanges de `FormControl` permet d'écouter les changements de valeur du champ.
@@ -837,9 +849,8 @@ this.price.valueChanges.subscribe(price => {
   }
 });
 ```
+
 Ici, on écoute les changements de valeur du champ price et on affiche un message si la valeur est en dehors de la plage autorisée.
-
-
 
 # Consignes pour le rendu final
 
@@ -857,4 +868,3 @@ Ici, on écoute les changements de valeur du champ price et on affiche un messag
 - utiliser les observables pour manipuler les données
 - Collecter des données avec un formulaire : reactive forms ou template driven forms
 - Bonus : installer et utiliser une bibliothèque comme Angular Material
-

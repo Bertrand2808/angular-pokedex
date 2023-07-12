@@ -22,7 +22,8 @@
 
 <div *ngIf="isSubmited" class="row w-100 text-center container-fluid">
   <div class="col">
-    <p>Pseudo : {{ trainerForm.controls["pseudo"].value }} </p>
+    <p>Pseudo : {{ trainerForm.controls["pseudo"].value | uppercase | tronqText: 8}} </p>
+    <!-- Use of custom pipe to tronq text in case of long pseudo -->
   </div>
   <div class="col">
     <p>Age : {{ trainerForm.controls["age"].value }}</p>
@@ -55,4 +56,7 @@
       <p>{{ pokemon.name.fr }}</p>
     </div>
   </div>
+</div>
+<div class="button-container-nav">
+  <button class="button" (click)="deleteTrainer()">Effacer le trainer</button>
 </div>

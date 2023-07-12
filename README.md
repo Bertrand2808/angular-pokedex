@@ -1,32 +1,60 @@
-# AngularPokedex
+# Cours ESGI Angular : Pokedex
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
+Application Pokedex développé dans le cadre du cours d'Angular de ESGI dispensé par M. BENDAHMANE.
 
-## Development server
+## Installation
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Pour installer le projet, il suffit de cloner le projet et d'installer les dépendances avec la commande suivante :
 
-## Code scaffolding
+```bash
+  npm install
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Lancement
 
-## Build
+Pour lancer le projet, il suffit de lancer la commande suivante :
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+  npm start // ou ng serve
+```
 
-## Running unit tests
+## Fonctionnalités
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Pokedex
 
-## Running end-to-end tests
+* Affichage de la liste des pokemons avec un système de card.
+  * Redirection vers la page de détail du pokemon au clic sur la card.
+* Système de recherche par nom de pokemon.
+  * Redirection vers la page de détail du pokemon au clic sur la card.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+*** Routes : /pokedex ***
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Détail d'un pokemon
 
-## Issue
+* Affichage du détail d'un pokemon avec ses caractéristiques.
+* Affichage de la liste des évolutions du pokemon.
+  * Redirection vers la page de détail du pokemon au clic sur la card.
+* Possibilité d'ajouter le pokemon à la équipe du dresseur.
 
-Issue concernant la mat-search et le mat-select dans le component search.component.ts / html
-(L'overlay est décalé par rapport au mat-select et à l'app-card)
+*** Routes : /pokedex/:id ***
+
+### Carte du dresseur
+* Formulaire de création d'un dresseur.
+* Affichage de la liste des pokemons de l'équipe du dresseur.
+  * Redirection vers la page de détail du pokemon au clic sur la card.
+* Possibilité de reset le dresseur et son équipe
+
+### Choix de pokemons
+
+* Petite animation nostalgique de choix de pokemon des anciennes versions GBA avec une choix entre trois pokemons aléatoires.
+  * Redirection vers la page de la carte du dresseur une fois le pokemon choisi.
+
+## Autres :
+- `Cours.md` : Notes prises lors des cours Angular de M. BENDAHMANE.
+- `Consignes.md` : Consignes du projet avec les différents critères de notation.
+- `Key-logger` : Projet de key-logger réalisé en cours dans un component à part.
+
+## Authors
+
+- [@Bertrand2808](https://www.github.com/Bertrand2808)

@@ -23,10 +23,22 @@ export class PokemonDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: {pokemon: Pokemon}
     ) {}
 
+    /**
+   *  Method to add the pokemon to the trainer's team
+   * and navigate to the trainer page
+   * if the trainer is not in the local storage, navigate to the trainer page
+   * if the trainer already has 6 pokemon, alert the user
+   * if the pokemon is already in the team, alert the user
+   * if the pokemon is not in the team, add it to the team
+   *
+   * @param {Pokemon} pokemon
+   * @return {*}
+   * @memberof PokemonDetailsComponent
+   */
   selectPokemon(pokemon: Pokemon) {
     const trainerFromStorage = this.trainerService.getTrainer();
     if (trainerFromStorage) {
-      this.trainer = trainerFromStorage;  // Initialisez votre trainer avec les données du local storage
+      this.trainer = trainerFromStorage;  // init trainer with local storage data
       if (this.trainer.pokemons && this.trainer.pokemons.some(p => p.pokedexId === pokemon.pokedexId)) {
         window.alert('Ce Pokémon est déjà dans votre équipe!');
         return;
@@ -42,8 +54,7 @@ export class PokemonDialogComponent {
       this.dialogRef.close();
       this.router.navigate(['/trainer']);
     } else {
-      // Si il n'y a pas de trainer dans le local storage, naviguez vers la page du trainer
-      // ou créez un nouveau trainer, selon les besoins de votre application
+      // if the trainer is not in the local storage, navigate to the trainer page
       this.router.navigate(['/trainer']);
     }
   }

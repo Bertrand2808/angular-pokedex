@@ -34,37 +34,49 @@ export class PokemonChoiceComponent implements OnInit {
       'Ténèbres': '#705848',
       'Spectre': '#705898',
     };
-    constructor(private pokemonService: PokemonService, public dialog: MatDialog,private router: Router) { }
+    constructor(private pokemonService: PokemonService, public dialog: MatDialog) { }
 
     ngOnInit(): void {
+      console.log('ngOnInit PokemonChoiceComponent');
       this.loadPokemonChoices();
       setTimeout(() => {
         this.showDialog = true;
       }, 3000); // attendre 3 secondes pour afficher la boîte de dialogue
   }
-
+  /**
+   *  Open the dialog to show the pokemon
+   *
+   * @param {Pokemon} pokemon
+   * @memberof PokemonChoiceComponent
+   */
   openDialog(pokemon: Pokemon) {
-    console.log(pokemon);
-    const dialogRef = this.dialog.open(PokemonDialogComponent, {
-        data: {pokemon: pokemon},
+      console.log(pokemon);
+      const dialogRef = this.dialog.open(PokemonDialogComponent, {
+          data: {pokemon: pokemon},
 
-    });
-  }
+      });
+    }
+  /**
+   *  Hide the dialog and show the pokemon
+   *
+   * @memberof PokemonChoiceComponent
+   */
   hideDialogAndShowPokemon() {
     this.showDialog = false;
     this.showPokemon = true;
   }
-
+  /**
+   *  Load the pokemon choices for the trainer
+   *
+   * @memberof PokemonChoiceComponent
+   */
   loadPokemonChoices() {
-    this.pokemonService.getPokemonList().subscribe((pokemons: Pokemon[]) => {
-      for(let i = 0; i < 3; i++) {
-        const randomIndex = Math.floor(Math.random() * pokemons.length);
-        this.randomPokemons.push(pokemons[randomIndex]);
-        pokemons.splice(randomIndex, 1);
-      }
-    });
-  }
-
-
-
+      this.pokemonService.getPokemonList().subscribe((pokemons: Pokemon[]) => {
+        for(let i = 0; i < 3; i++) {
+          const randomIndex = Math.floor(Math.random() * pokemons.length);
+          this.randomPokemons.push(pokemons[randomIndex]);
+          pokemons.splice(randomIndex, 1);
+        }
+      });
+    }
 }

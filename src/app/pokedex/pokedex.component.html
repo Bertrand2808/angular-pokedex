@@ -12,7 +12,9 @@
       <img *ngIf="pokemon && pokemon.types && pokemon.types.length > 0"
         [style.background-color]="pokemonTypeColors[pokemon.types[0].name]"
         [src]="pokemon.sprites.regular?pokemon.sprites.regular:pokemon.sprites.shiny" alt="{{pokemon.name.fr}}">
+        <!-- Binding de la propriété pokemon.name.fr qui correspond au nom du pokemon en français -->
       <p>{{ pokemon.name.fr }}</p>
+      <!-- Binding de la propriété pokemon.pokedexId qui correspond au numéro du pokemon dans le pokedex -->
       <p class="id">ID: {{ pokemon.pokedexId }}</p>
     </div>
   </div>
